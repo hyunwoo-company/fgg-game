@@ -1,6 +1,6 @@
 # Stage 1: deps
 FROM node:20-alpine AS deps
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10.33.2
 WORKDIR /app
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml turbo.json ./
 COPY packages/game-logic/package.json ./packages/game-logic/
@@ -9,7 +9,7 @@ RUN pnpm install --frozen-lockfile
 
 # Stage 2: builder
 FROM node:20-alpine AS builder
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10.33.2
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/packages/game-logic/node_modules ./packages/game-logic/node_modules
@@ -23,7 +23,7 @@ RUN pnpm --filter @lexio/server build
 
 # Stage 3: runner (production)
 FROM node:20-alpine AS runner
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10.33.2
 WORKDIR /app
 ENV NODE_ENV=production
 
