@@ -84,7 +84,7 @@ export function ScoreBoard({ gameState, roundResult, onReady, isGameOver, endRea
         )}
       </header>
 
-      {/* 페널티 (숫자 1 보유 — FGG 룰) */}
+      {/* 페널티 (숫자 2 보유) */}
       {roundResult.penalizedPlayers.length > 0 && (
         <section
           className="fgg-panel"
@@ -100,7 +100,7 @@ export function ScoreBoard({ gameState, roundResult, onReady, isGameOver, endRea
             className="fgg-eyebrow"
             style={{ color: 'var(--fgg-jujak, #C8323D)', marginBottom: 8 }}
           >
-            Penalty · 숫자 1 보유
+            Penalty · 숫자 2 보유
           </div>
           <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 6 }}>
             {roundResult.penalizedPlayers.map((p) => (
@@ -211,7 +211,7 @@ export function ScoreBoard({ gameState, roundResult, onReady, isGameOver, endRea
           margin: 0,
         }}
       >
-        ※ 게임 종료 시 손에 든 ‘숫자 1’ 타일 1개당 남은 타일 개수가 2배로 계산됩니다 (2개 = 4배, 3개 = 8배)
+        ※ 게임 종료 시 손에 든 ‘숫자 2’ 타일 1개당 남은 타일 개수가 2배로 계산됩니다 (2개 = 4배, 3개 = 8배)
       </p>
 
       {/* 칩 랭킹 */}

@@ -1,4 +1,4 @@
-import { ALL_SUITS } from './constants';
+import { ALL_SUITS, FIRST_PLAYER_TILE } from './constants';
 import type { Tile, TileNumber, GameConfig } from './types';
 
 export function createDeck(config: GameConfig): Tile[] {
@@ -28,10 +28,10 @@ export function dealTiles(deck: Tile[], config: GameConfig): Tile[][] {
   return hands;
 }
 
-// FGG: 청룡2(cloud-2, 최약 타일) 보유자 인덱스 반환
+// 매 라운드 백호 3 보유자가 선
 export function findFirstPlayer(hands: Tile[][]): number {
   for (let i = 0; i < hands.length; i++) {
-    if (hands[i].some((t) => t.suit === 'cloud' && t.number === 2)) return i;
+    if (hands[i].some((t) => t.suit === FIRST_PLAYER_TILE.suit && t.number === FIRST_PLAYER_TILE.number)) return i;
   }
   return 0;
 }

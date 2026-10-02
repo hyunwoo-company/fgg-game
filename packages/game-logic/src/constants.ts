@@ -1,15 +1,17 @@
 import type { TileNumber, Suit, CombinationType, GameConfig, PlayerCount } from './types';
 
-// FGG 숫자 서열: 1이 최강(14, ace high), 2가 최약(0)
-// 1 > 15 > 14 > ... > 4 > 3 > 2
+// 렉시오 숫자 서열: 2가 최강, 3이 최약
 export const NUMBER_RANK: Record<TileNumber, number> = {
-  2: 0, 3: 1, 4: 2, 5: 3, 6: 4, 7: 5, 8: 6, 9: 7,
-  10: 8, 11: 9, 12: 10, 13: 11, 14: 12, 15: 13,
-  1: 14,
+  3: 0, 4: 1, 5: 2, 6: 3, 7: 4, 8: 5, 9: 6,
+  10: 7, 11: 8, 12: 9, 13: 10, 14: 11, 15: 12,
+  1: 13, 2: 14,
 };
 
+export const TOP_NUMBER: TileNumber = 2;
+export const FIRST_PLAYER_TILE = { suit: 'cloud', number: 3 } as const;
+
 // 문양 서열: sun이 최강(3), cloud가 최약(0)
-// 사신수 매핑: sun=주작(火) > moon=현무(水) > star=백호(金) > cloud=청룡(木)
+// 사신수 매핑: sun=주작 > moon=청룡 > star=현무 > cloud=백호
 export const SUIT_RANK: Record<Suit, number> = {
   cloud: 0,
   star: 1,
@@ -49,10 +51,10 @@ export function getGameConfig(playerCount: PlayerCount, mode: 'recommended' | 'f
 
 export const ALL_SUITS: Suit[] = ['sun', 'moon', 'star', 'cloud'];
 
-// 사신수 매핑 (운종룡: 청룡↔구름, 양↔태양: 주작↔해, 음↔달: 현무↔달, 별↔백호)
+// FGG 사용자 지정 사신수 대응
 export const SUIT_LABEL: Record<Suit, string> = {
   sun: '주작',
-  moon: '현무',
-  star: '백호',
-  cloud: '청룡',
+  moon: '청룡',
+  star: '현무',
+  cloud: '백호',
 };

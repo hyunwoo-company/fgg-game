@@ -3,13 +3,11 @@
 import Link from 'next/link';
 import type { Tile as TileType, Suit, TileNumber } from '@lexio/game-logic';
 import { Tile } from '@/components/tile/Tile';
+import { SUIT_META } from '@/components/tile/tileAssets';
+import { StraightRules } from '@/components/guide/StraightRules';
+import { NUMBER_RANK, TOP_NUMBER } from '@lexio/game-logic';
 
-const SASIN: Record<Suit, { name: string; color: string }> = {
-  sun: { name: '주작', color: '#C8323D' },
-  moon: { name: '현무', color: '#2A8C56' },
-  star: { name: '백호', color: '#D88438' },
-  cloud: { name: '청룡', color: '#3A5A8C' },
-};
+const SASIN = SUIT_META;
 
 type ExampleTile = { number: TileNumber; suit: Suit };
 
@@ -24,32 +22,32 @@ const HAND_RANKS: HandRank[] = [
   {
     name: '싱글',
     desc: '타일 1개. 더 높은 숫자 또는 같은 숫자라면 더 높은 문양.',
-    sub: '최강패: 주작 1',
-    example: [{ number: 1, suit: 'sun' }],
+    sub: '최강패: 주작 2',
+    example: [{ number: 2, suit: 'sun' }],
   },
   {
     name: '페어',
     desc: '같은 숫자 타일 2개. 같은 숫자 페어라면 가장 높은 문양 포함 쪽이 승.',
-    sub: '최강패: 1 페어 (주작 1 포함)',
+    sub: '최강패: 2 페어 (주작 2 포함)',
     example: [
-      { number: 13, suit: 'sun' },
-      { number: 13, suit: 'moon' },
+      { number: 2, suit: 'sun' },
+      { number: 2, suit: 'moon' },
     ],
   },
   {
     name: '트리플',
     desc: '같은 숫자 타일 3개. 더 높은 숫자가 승.',
-    sub: '최강패: 1 트리플',
+    sub: '최강패: 2 트리플',
     example: [
-      { number: 11, suit: 'sun' },
-      { number: 11, suit: 'moon' },
-      { number: 11, suit: 'star' },
+      { number: 2, suit: 'sun' },
+      { number: 2, suit: 'moon' },
+      { number: 2, suit: 'star' },
     ],
   },
   {
     name: '스트레이트',
     desc: '문양 무관, 연속된 숫자 5개.',
-    sub: '1은 maxNumber 뒤에 ace high (예: 12-13-14-15-1). 1과 2는 한 스트레이트에 함께 못 들어감.',
+    sub: '1은 최고 숫자 뒤에 붙을 수 있음(12-13-14-15-1). 1-2-3-4-5가 최강, 다음은 2-3-4-5-6. 1 뒤에 2 불가.',
     example: [
       { number: 5, suit: 'sun' },
       { number: 6, suit: 'moon' },
@@ -94,17 +92,18 @@ const HAND_RANKS: HandRank[] = [
   {
     name: '스트레이트 플러시',
     desc: '같은 문양 + 연속된 숫자 5개. 5장 조합 중 최강.',
+    sub: '최강패: 주작 1-2-3-4-5',
     example: [
+      { number: 1, suit: 'sun' },
+      { number: 2, suit: 'sun' },
+      { number: 3, suit: 'sun' },
       { number: 4, suit: 'sun' },
       { number: 5, suit: 'sun' },
-      { number: 6, suit: 'sun' },
-      { number: 7, suit: 'sun' },
-      { number: 8, suit: 'sun' },
     ],
   },
 ];
 
-const NUMBER_ORDER: TileNumber[] = [1, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+const NUMBER_ORDER = (Object.keys(NUMBER_RANK).map(Number) as TileNumber[]).sort((a, b) => NUMBER_RANK[b] - NUMBER_RANK[a]);
 
 export function GuideScreen() {
   return (
@@ -160,7 +159,7 @@ export function GuideScreen() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
               gap: 24,
             }}
           >
@@ -190,21 +189,21 @@ export function GuideScreen() {
                       style={{
                         padding: '4px 9px',
                         background:
-                          n === 1
+                          n === TOP_NUMBER
                             ? 'linear-gradient(180deg, var(--fgg-gold-bright), var(--fgg-gold-deep))'
-                            : n === 2
+                            : n === 3
                               ? 'rgba(120,120,140,0.18)'
                               : 'var(--fgg-bg-2)',
                         color:
-                          n === 1
+                          n === TOP_NUMBER
                             ? '#1A1408'
-                            : n === 2
+                            : n === 3
                               ? 'var(--fgg-text-muted)'
                               : 'var(--fgg-text)',
                         borderRadius: 5,
-                        fontWeight: n === 1 || n === 2 ? 700 : 500,
+                        fontWeight: n === TOP_NUMBER || n === 3 ? 700 : 500,
                         border:
-                          n === 1
+                          n === TOP_NUMBER
                             ? '1px solid var(--fgg-gold-deep)'
                             : '1px solid var(--fgg-line)',
                       }}
@@ -232,8 +231,7 @@ export function GuideScreen() {
                   lineHeight: 1.5,
                 }}
               >
-                <span style={{ color: 'var(--fgg-gold-bright)', fontWeight: 600 }}>1이 최강(ace)</span>,
-                2가 최약. (FGG 룰)
+                <span style={{ color: 'var(--fgg-gold-bright)', fontWeight: 600 }}>2가 가장 강하고 1이 두 번째, 3이 가장 약합니다</span>
               </div>
             </div>
 
@@ -269,7 +267,7 @@ export function GuideScreen() {
                         style={{
                           fontFamily: 'var(--fgg-font-display)',
                           fontSize: 16,
-                          color: SASIN[s].color,
+                          color: s === 'cloud' ? 'var(--fgg-gold)' : SASIN[s].color,
                           fontWeight: 600,
                         }}
                       >
@@ -285,6 +283,8 @@ export function GuideScreen() {
             </div>
           </div>
         </div>
+
+        <p style={{ fontSize: 12, color: 'var(--fgg-text-dim)' }}>기본 모드: 3인 1~9 · 4인 1~13 · 5인 1~15. 전체 모드: 모두 1~15.</p>
 
         {/* Combinations */}
         <div className="fgg-eyebrow" style={{ marginBottom: 14 }}>
@@ -348,6 +348,8 @@ export function GuideScreen() {
           ))}
         </div>
 
+        <StraightRules />
+
         {/* Special rules */}
         <div
           style={{
@@ -367,16 +369,12 @@ export function GuideScreen() {
               body: '앞사람이 낸 개수와 동일하게, 더 높은 서열로만 받아칠 수 있습니다.',
             },
             {
-              title: '1 페널티 주의',
-              body: '게임 종료 시 손에 남은 1(ace) 1개당 남은 패 ×2배. (2개면 ×4, 3개면 ×8)',
+              title: '2 페널티 주의',
+              body: '라운드 종료 시 손에 남은 2 한 장당 남은 패 ×2배 (2장 ×4, 3장 ×8)',
             },
             {
-              title: '1라운드 첫 선 (先)',
-              body: '가장 약한 타일인 청룡 2 보유자가 첫 선이 됩니다.',
-            },
-            {
-              title: '다음 라운드의 선',
-              body: '직전 라운드에서 가장 먼저 패를 다 낸 1등이 다음 라운드의 선이 됩니다. 첫 선과 달리 청룡 2 강제 시작이 아니며, 어떤 패든 자유롭게 시작할 수 있습니다.',
+              title: '선 (先)',
+              body: '매 라운드 가장 약한 타일인 백호 3 보유자가 선. 백호 3을 꼭 낼 필요는 없습니다.',
             },
             {
               title: '라운드 중 새 선',

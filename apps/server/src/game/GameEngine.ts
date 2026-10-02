@@ -12,6 +12,7 @@ export class GameEngine {
   private state: GameState;
   private playerCount: PlayerCount;
   private mode: GameMode;
+  private hasPlayedThisRound = false;
 
   constructor(
     players: Pick<Player, 'id' | 'name'>[],
@@ -37,6 +38,7 @@ export class GameEngine {
     // 현재 살아있는 (게임에 남아있는) 플레이어 수에 맞춰 config 재계산
     this.playerCount = this.state.players.length as PlayerCount;
     const config = getGameConfig(this.playerCount, this.mode);
+    this.hasPlayedThisRound = false;
     const deck = shuffleDeck(createDeck(config));
     const hands = dealTiles(deck, config);
     const firstIdx = findFirstPlayer(hands);
@@ -111,6 +113,8 @@ export class GameEngine {
     if (this.state.lastPlay && !canPlay(combination, this.state.lastPlay)) {
       return { ok: false, reason: '더 강한 패를 내야 합니다.' };
     }
+
+    this.hasPlayedThisRound = true;
 
     // 타일 제거
     const newHand = currentPlayer.hand.filter((t) => !tileIds.includes(t.id));
@@ -198,6 +202,8 @@ export class GameEngine {
     });
 
     return {
+      config: getGameConfig(this.playerCount, this.mode),
+      hasPlayedThisRound: this.hasPlayedThisRound,
       phase: this.state.phase,
       players: clientPlayers,
       currentPlayerIndex: this.state.currentPlayerIndex,

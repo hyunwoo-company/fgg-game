@@ -112,6 +112,15 @@ export function GameBoard() {
     return () => window.clearInterval(tid);
   }, [currentPlayerId]);
 
+  // Hook 순서를 유지하며, 턴 전환 snapshot의 이전 0초로 자동 패스하지 않도록 시간 변경만 감지.
+  useEffect(() => {
+    if (turnSecondsLeft === 0 && gameState && currentPlayerId === myId && roomId) {
+      socket.emit('game:pass', { roomId });
+      clearSelection();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [turnSecondsLeft]);
+
   if (!gameState || !myId || !roomId) return null;
 
   const playerCount = gameState.players.length as 3 | 4 | 5;
@@ -133,14 +142,6 @@ export function GameBoard() {
     socket.emit('game:pass', { roomId });
     clearSelection();
   };
-
-  // 0초 도달 + 내 차례면 자동 pass (서버 도달 못해도 client UX 차원)
-  useEffect(() => {
-    if (turnSecondsLeft === 0 && gameState && currentPlayerId === myId) {
-      handlePass();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [turnSecondsLeft]);
 
   const isGameOver = gameState.phase === 'scoring' && gameState.players.length < 3;
 
@@ -349,7 +350,7 @@ export function GameBoard() {
             zIndex: 4,
           }}
         >
-          <CenterField lastPlay={gameState.lastPlay} lastPlayerName={lastPlayerName} />
+          <CenterField lastPlay={gameState.lastPlay} lastPlayerName={lastPlayerName} hasPlayedThisRound={gameState.hasPlayedThisRound ?? Boolean(gameState.lastPlay)} />
         </div>
 
       </div>

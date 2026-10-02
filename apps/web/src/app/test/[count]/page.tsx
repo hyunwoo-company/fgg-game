@@ -28,6 +28,7 @@ export default function TestPage({ params }: PageProps) {
       players: state.players.map((p) => ({ id: p.id, name: p.name, isReady: true })),
       playerCount,
       isPlaying: true,
+      mode: state.config?.mode,
     });
     setGameState(state);
     setReady(true);

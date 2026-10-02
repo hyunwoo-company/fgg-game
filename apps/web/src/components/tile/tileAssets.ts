@@ -4,13 +4,9 @@
 //   bg/ bg-top/  AI 생성 민화풍 배경 (일반 / 최강 숫자)
 //   creature/ creature-top/  배경 제거한 사신수 일러스트 (일반 / 최강 숫자)
 
-import type { Suit, Tile as TileType, TileNumber } from '@lexio/game-logic';
+import type { Suit, Tile as TileType } from '@lexio/game-logic';
 
-/**
- * 최강 숫자 — 이 숫자 타일만 금빛 몸체 + 특별 액자(TopFrame)로 그린다.
- * 렉시오 룰 변경 작업(별도 세션)에서 game-logic 상수로 대체 예정.
- */
-export const TOP_NUMBER: TileNumber = 2;
+import { TOP_NUMBER } from '@lexio/game-logic';
 
 export function isTopTile(tile: TileType): boolean {
   return tile.number === TOP_NUMBER;
@@ -53,9 +49,9 @@ export interface SuitMeta {
 // 내부 suit 키는 게임로직 호환용 (UI에는 노출 안 함)
 export const SUIT_META: Readonly<Record<Suit, SuitMeta>> = {
   sun: { name: '주작', color: '#C8323D', key: 'jujak' },
-  moon: { name: '현무', color: '#2A8C56', key: 'hyunmu' },
-  star: { name: '백호', color: '#1A1408', key: 'baekho' },
-  cloud: { name: '청룡', color: '#3A5A8C', key: 'cheongryong' },
+  moon: { name: '청룡', color: '#3A5A8C', key: 'cheongryong' },
+  star: { name: '현무', color: '#2A8C56', key: 'hyunmu' },
+  cloud: { name: '백호', color: '#1A1408', key: 'baekho' },
 };
 
 /* ------------------------------------------------------------ 3D 몸체 기하 */

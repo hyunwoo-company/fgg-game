@@ -17,9 +17,10 @@ const COMBO_LABEL: Record<string, string> = {
 interface CenterFieldProps {
   lastPlay: TileCombination | null;
   lastPlayerName?: string;
+  hasPlayedThisRound: boolean;
 }
 
-export function CenterField({ lastPlay, lastPlayerName }: CenterFieldProps) {
+export function CenterField({ lastPlay, lastPlayerName, hasPlayedThisRound }: CenterFieldProps) {
   if (!lastPlay) {
     return (
       <div
@@ -40,11 +41,11 @@ export function CenterField({ lastPlay, lastPlayerName }: CenterFieldProps) {
             fontWeight: 600,
           }}
         >
-          첫 패를 내 주세요
+          {hasPlayedThisRound ? '새 선' : '첫 패를 내 주세요'}
         </div>
         <div
           style={{
-            width: 220,
+            width: 240,
             height: 100,
             borderRadius: 12,
             border: '2px dashed var(--fgg-line)',
@@ -56,7 +57,7 @@ export function CenterField({ lastPlay, lastPlayerName }: CenterFieldProps) {
             fontSize: 14,
           }}
         >
-          청룡2 보유자가 시작
+          {hasPlayedThisRound ? '새 선 — 원하는 조합으로 시작' : '백호 3 보유자가 시작'}
         </div>
       </div>
     );

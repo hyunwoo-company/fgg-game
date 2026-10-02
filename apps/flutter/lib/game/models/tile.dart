@@ -1,8 +1,8 @@
 enum Suit {
-  sun,   // 해 (빨강, 최강)
-  moon,  // 달 (초록)
-  star,  // 별 (노랑)
-  cloud, // 구름 (파랑, 최약)
+  sun, // 주작·해 (최강)
+  moon, // 청룡·달
+  star, // 현무·별
+  cloud, // 백호·구름 (최약)
 }
 
 class Tile {
@@ -13,12 +13,16 @@ class Tile {
   const Tile({required this.id, required this.number, required this.suit});
 
   factory Tile.fromJson(Map<String, dynamic> json) => Tile(
-        id: json['id'] as String,
-        number: json['number'] as int,
-        suit: Suit.values.byName(json['suit'] as String),
-      );
+    id: json['id'] as String,
+    number: json['number'] as int,
+    suit: Suit.values.byName(json['suit'] as String),
+  );
 
-  Map<String, dynamic> toJson() => {'id': id, 'number': number, 'suit': suit.name};
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'number': number,
+    'suit': suit.name,
+  };
 
   @override
   String toString() => '${suit.name} $number';

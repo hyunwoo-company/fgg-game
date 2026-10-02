@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { useGameStore } from '@/store/gameStore';
 import { findPlayableCombinations, getMaxNumber } from '@/lib/suggestions';
 import type { Tile } from '@lexio/game-logic';
@@ -13,7 +13,7 @@ interface ActionButtonsProps {
 }
 
 export function ActionButtons({ isMyTurn, hasSelection, onPlay, onPass }: ActionButtonsProps) {
-  const { gameState, myId, selectTiles } = useGameStore();
+  const { gameState, roomInfo, myId, selectTiles } = useGameStore();
   const hintIndexRef = useRef(0);
 
   const suggestions = useMemo(() => {
@@ -21,9 +21,9 @@ export function ActionButtons({ isMyTurn, hasSelection, onPlay, onPass }: Action
     const me = gameState.players.find((p) => p.id === myId);
     const hand = (me?.hand ?? []) as Tile[];
     if (hand.length === 0) return [];
-    const maxNumber = getMaxNumber(gameState.players.length);
+    const maxNumber = getMaxNumber(gameState, roomInfo?.mode);
     return findPlayableCombinations(hand, gameState.lastPlay, maxNumber);
-  }, [isMyTurn, gameState, myId]);
+  }, [isMyTurn, gameState, roomInfo?.mode, myId]);
 
   const handleHint = () => {
     if (suggestions.length === 0) return;
@@ -34,7 +34,7 @@ export function ActionButtons({ isMyTurn, hasSelection, onPlay, onPass }: Action
   };
 
   // 손패 변경(차례 변경)되면 인덱스 리셋
-  useMemo(() => { hintIndexRef.current = 0; }, [suggestions]);
+  useEffect(() => { hintIndexRef.current = 0; }, [suggestions]);
 
   if (!isMyTurn) {
     return (

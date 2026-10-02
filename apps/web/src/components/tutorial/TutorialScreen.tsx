@@ -4,20 +4,18 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { Tile as TileType, Suit, TileNumber } from '@lexio/game-logic';
 import { Tile } from '@/components/tile/Tile';
+import { SUIT_META } from '@/components/tile/tileAssets';
+import { StraightRules } from '@/components/guide/StraightRules';
+import { NUMBER_RANK, TOP_NUMBER } from '@lexio/game-logic';
 
-const SASIN: Record<Suit, { name: string; color: string }> = {
-  sun: { name: '주작', color: '#C8323D' },
-  moon: { name: '현무', color: '#2A8C56' },
-  star: { name: '백호', color: '#D88438' },
-  cloud: { name: '청룡', color: '#3A5A8C' },
-};
+const SASIN = SUIT_META;
 
 type Step = {
   n: number;
   eyebrow: string;
   title: string;
   body: string;
-  visual: 'logo' | 'suits' | 'numbers' | 'counts' | 'first' | 'score';
+  visual: 'logo' | 'suits' | 'numbers' | 'counts' | 'straight' | 'first' | 'score';
 };
 
 const STEPS: Step[] = [
@@ -32,14 +30,14 @@ const STEPS: Step[] = [
     n: 2,
     eyebrow: 'STEP 02',
     title: '4가지 사신수 · 60개의 타일',
-    body: '주작·현무·백호·청룡 네 사신수가 각자의 문양을 갖습니다. 같은 숫자라면 주작이 가장 강하고 청룡이 가장 약합니다.',
+    body: '주작·청룡·현무·백호 네 사신수가 각자의 문양을 갖습니다. 같은 숫자라면 주작이 가장 강하고 백호가 가장 약합니다.',
     visual: 'suits',
   },
   {
     n: 3,
     eyebrow: 'STEP 03',
     title: '숫자 서열은 거꾸로',
-    body: '1이 가장 강하고(ace), 2가 가장 약합니다. 그 다음은 15 → 14 → ... → 3 순. 일반 카드 게임과 다른 FGG의 핵심 룰입니다.',
+    body: '2가 가장 강하고 1이 그다음, 그 뒤로 15 → 14 → … → 3 순서입니다. 3이 가장 약합니다.',
     visual: 'numbers',
   },
   {
@@ -52,15 +50,22 @@ const STEPS: Step[] = [
   {
     n: 5,
     eyebrow: 'STEP 05',
-    title: '첫 선(先)은 청룡 2',
-    body: '게임 시작 시 가장 약한 타일인 청룡 2(cloud-2)를 가진 사람이 첫 번째 선이 됩니다. 다만 첫 턴에 반드시 청룡 2를 내야 하는 것은 아닙니다.',
-    visual: 'first',
+    title: '스트레이트와 1·2',
+    body: '1은 최고 숫자 뒤에 붙어 12-13-14-15-1을 만들 수 있고, 1-2-3-4-5와 2-3-4-5-6도 스트레이트입니다. 가장 강한 스트레이트는 1-2-3-4-5. 단, 1 뒤에 2를 이어 붙일 수는 없습니다.',
+    visual: 'straight',
   },
   {
     n: 6,
     eyebrow: 'STEP 06',
-    title: '점수와 1(ace) 페널티',
-    body: '라운드 종료 시 남은 타일 개수 차이만큼 칩을 교환합니다. 손에 1(ace)이 남으면 남은 패가 ×2배로 계산되니 주의하세요. (2개면 ×4, 3개면 ×8)',
+    title: '선(先)은 백호 3',
+    body: '매 라운드 가장 약한 타일인 백호 3을 가진 사람이 선이 됩니다. 첫 턴에 백호 3을 꼭 낼 필요는 없습니다.',
+    visual: 'first',
+  },
+  {
+    n: 7,
+    eyebrow: 'STEP 07',
+    title: '점수와 2 페널티',
+    body: '라운드 종료 시 남은 타일 개수 차이만큼 칩을 교환합니다. 손에 2가 남으면 남은 패가 ×2배로 계산되니 주의하세요. (2개면 ×4, 3개면 ×8)',
     visual: 'score',
   },
 ];
@@ -133,7 +138,7 @@ function VisualSuits() {
               style={{
                 fontFamily: 'var(--fgg-font-display)',
                 fontSize: 18,
-                color: SASIN[s].color,
+                color: s === 'cloud' ? 'var(--fgg-gold)' : SASIN[s].color,
                 fontWeight: 600,
               }}
             >
@@ -163,85 +168,29 @@ function VisualSuits() {
         }}
       >
         <span style={{ color: SASIN.sun.color }}>주작</span> ›
-        <span style={{ color: SASIN.moon.color }}>현무</span> ›
-        <span style={{ color: SASIN.star.color }}>백호</span> ›
-        <span style={{ color: SASIN.cloud.color }}>청룡</span>
+        <span style={{ color: SASIN.moon.color }}>{SASIN.moon.name}</span> ›
+        <span style={{ color: SASIN.star.color }}>{SASIN.star.name}</span> ›
+        <span style={{ color: 'var(--fgg-gold)' }}>{SASIN.cloud.name}</span>
       </div>
     </div>
   );
 }
 
 function VisualNumbers() {
-  const seq: TileNumber[] = [1, 15, 14, 13, 12];
+  const seq = (Object.keys(NUMBER_RANK).map(Number) as TileNumber[]).sort((a, b) => NUMBER_RANK[b] - NUMBER_RANK[a]);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22 }}>
-      <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end' }}>
-        {seq.map((n, i) => (
-          <div
-            key={n}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 6,
-              opacity: 1 - i * 0.15,
-            }}
-          >
-            <Tile
-              tile={{ number: n as TileNumber, suit: 'sun' } as TileType}
-              size="sm"
-            />
-            <span
-              style={{
-                fontSize: 11,
-                color: i === 0 ? 'var(--fgg-gold-bright)' : 'var(--fgg-text-muted)',
-                fontWeight: i === 0 ? 700 : 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {i === 0 ? 'ACE' : `#${i + 1}`}
-            </span>
-          </div>
-        ))}
-        <span
-          style={{
-            color: 'var(--fgg-text-muted)',
-            fontSize: 18,
-            alignSelf: 'center',
-            padding: '0 8px',
-          }}
-        >
-          ···
-        </span>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <Tile
-            tile={{ number: 2 as TileNumber, suit: 'cloud' } as TileType}
-            size="sm"
-          />
-          <span
-            style={{
-              fontSize: 11,
-              color: 'var(--fgg-text-muted)',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-            }}
-          >
-            가장 약함
-          </span>
+      <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
+          <Tile tile={{ id: 'sun-2', number: TOP_NUMBER, suit: 'sun' }} size="lg" />
+          <p style={{ fontSize: 12, color: 'var(--fgg-gold)' }}>주작 2 · 최강</p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <Tile tile={{ id: 'cloud-3', number: 3, suit: 'cloud' }} size="lg" />
+          <p style={{ fontSize: 12, color: 'var(--fgg-text-dim)' }}>백호 3 · 최약</p>
         </div>
       </div>
-      <div
-        style={{
-          fontSize: 12,
-          color: 'var(--fgg-gold)',
-          fontStyle: 'italic',
-          letterSpacing: '0.04em',
-        }}
-      >
-        1 › 15 › 14 › 13 › ··· › 4 › 3 › 2
-      </div>
+      <div style={{ fontSize: 12, color: 'var(--fgg-gold)', textAlign: 'center', lineHeight: 1.6 }}>{seq.join(' › ')}</div>
     </div>
   );
 }
@@ -350,7 +299,7 @@ function VisualFirst() {
         先
       </div>
       <Tile
-        tile={{ number: 2 as TileNumber, suit: 'cloud' } as TileType}
+        tile={{ number: 3 as TileNumber, suit: 'cloud' } as TileType}
         size="lg"
       />
       <div
@@ -361,9 +310,9 @@ function VisualFirst() {
           lineHeight: 1.6,
         }}
       >
-        가장 약한 타일 <strong style={{ color: SASIN.cloud.color }}>청룡 2</strong>
+        가장 약한 타일 <strong style={{ color: 'var(--fgg-gold)' }}>백호 3</strong>
         <br />
-        보유자가 첫 선
+        보유자가 매 라운드 선
       </div>
     </div>
   );
@@ -374,7 +323,7 @@ function VisualScore() {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
         <Tile
-          tile={{ number: 1 as TileNumber, suit: 'sun' } as TileType}
+          tile={{ number: TOP_NUMBER, suit: 'sun' } as TileType}
           size="lg"
         />
         <span
@@ -401,7 +350,7 @@ function VisualScore() {
           maxWidth: 280,
         }}
       >
-        손에 남은 <strong style={{ color: 'var(--fgg-gold-bright)' }}>1(ace)</strong> 1개당
+        손에 남은 <strong style={{ color: 'var(--fgg-gold-bright)' }}>2</strong> 1개당
         <br />
         남은 패 개수가 ×2배로 계산
       </div>
@@ -419,6 +368,8 @@ function StepVisual({ visual }: { visual: Step['visual'] }) {
       return <VisualNumbers />;
     case 'counts':
       return <VisualCounts />;
+    case 'straight':
+      return <StraightRules />;
     case 'first':
       return <VisualFirst />;
     case 'score':
@@ -499,7 +450,7 @@ export function TutorialScreen() {
         style={{
           flex: 1,
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
           alignItems: 'start',
           padding: 'clamp(20px, 5vw, 40px) clamp(18px, 5vw, 60px)',
           paddingBottom: 'calc(clamp(20px, 5vw, 40px) + 80px)' /* fixed footer 공간 */,

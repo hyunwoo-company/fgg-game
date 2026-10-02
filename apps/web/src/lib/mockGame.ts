@@ -1,3 +1,4 @@
+import { detectCombination, getGameConfig } from '@lexio/game-logic';
 import type { ClientGameState, Tile, ClientPlayer, TileCombination } from '@lexio/game-logic';
 
 const t = (number: number, suit: 'sun' | 'moon' | 'star' | 'cloud'): Tile => ({
@@ -9,19 +10,19 @@ const t = (number: number, suit: 'sun' | 'moon' | 'star' | 'cloud'): Tile => ({
 // FGG 사신수 매핑 (내부 suit 키는 게임로직 호환용)
 
 const HAND_3P: Tile[] = [
-  t(2, 'cloud'), t(3, 'sun'),  t(4, 'moon'), t(5, 'star'), t(6, 'cloud'),
+  t(3, 'cloud'), t(2, 'sun'), t(4, 'moon'), t(5, 'star'), t(6, 'cloud'),
   t(7, 'sun'),   t(7, 'moon'), t(8, 'cloud'),t(9, 'star'), t(9, 'moon'),
   t(1, 'sun'),   t(1, 'cloud'),
 ];
 
 const HAND_4P: Tile[] = [
-  t(2, 'cloud'), t(3, 'star'), t(4, 'moon'), t(5, 'sun'), t(6, 'cloud'),
+  t(3, 'cloud'), t(2, 'star'), t(4, 'moon'), t(5, 'sun'), t(6, 'cloud'),
   t(7, 'sun'),   t(9, 'star'), t(9, 'moon'), t(11, 'sun'),t(13, 'cloud'),
   t(13, 'star'), t(1, 'sun'),  t(1, 'moon'),
 ];
 
 const HAND_5P: Tile[] = [
-  t(2, 'cloud'), t(4, 'sun'),  t(5, 'star'), t(7, 'moon'),t(8, 'cloud'),
+  t(3, 'cloud'), t(2, 'sun'),  t(5, 'star'), t(7, 'moon'),t(8, 'cloud'),
   t(10, 'star'), t(11, 'moon'),t(12, 'sun'), t(13, 'star'),t(14, 'moon'),
   t(15, 'cloud'),t(1, 'sun'),
 ];
@@ -34,11 +35,7 @@ const HAND_BY_COUNT: Record<3 | 4 | 5, Tile[]> = {
 
 const NAMES = ['나', '용현', 'NeoTaco', 'Mira', '소영'];
 
-const SAMPLE_LAST_PLAY: TileCombination = {
-  tiles: [t(9, 'cloud'), t(9, 'sun')],
-  type: 'pair',
-  strength: 9 * 10 + 3,
-};
+const SAMPLE_LAST_PLAY = detectCombination([t(9, 'cloud'), t(9, 'sun')]) as TileCombination;
 
 export interface MockSetup {
   myId: string;
@@ -63,12 +60,14 @@ export function buildMockGame(
   }));
 
   const state: ClientGameState = {
+    config: getGameConfig(playerCount),
+    hasPlayedThisRound: !options.noLastPlay,
     phase: 'playing',
     players,
-    currentPlayerIndex: options.myTurn ? 0 : 1,
+    currentPlayerIndex: options.noLastPlay || options.myTurn ? 0 : 1,
     lastPlay: options.noLastPlay ? null : SAMPLE_LAST_PLAY,
-    lastPlayerId: options.noLastPlay ? null : 'p2',
-    passCount: options.noLastPlay ? 0 : 1,
+    lastPlayerId: options.noLastPlay ? null : `p${playerCount - 1}`,
+    passCount: options.noLastPlay || options.myTurn ? 0 : 1,
     roundNumber: 3,
     firstPlayerId: 'p0',
   };

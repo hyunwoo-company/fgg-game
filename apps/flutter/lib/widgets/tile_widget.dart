@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import '../game/constants.dart';
 import '../game/models/tile.dart';
 
 const _suitColor = {
-  Suit.sun: Color(0xFFEF4444),    // 빨강
-  Suit.moon: Color(0xFF22C55E),   // 초록
-  Suit.star: Color(0xFFEAB308),   // 노랑
-  Suit.cloud: Color(0xFF3B82F6),  // 파랑
+  Suit.sun: Color(0xFFEF4444), // 빨강
+  Suit.moon: Color(0xFF22C55E), // 초록
+  Suit.star: Color(0xFFEAB308), // 노랑
+  Suit.cloud: Color(0xFF3B82F6), // 파랑
 };
 
 const _suitSymbol = {
@@ -72,8 +73,16 @@ class TileWidget extends StatelessWidget {
             children: [
               Text(symbol, style: TextStyle(fontSize: 18, color: textColor)),
               Text(
+                suitLabel[tile.suit]!,
+                style: TextStyle(fontSize: 10, color: textColor),
+              ),
+              Text(
                 '${tile.number}',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
               ),
             ],
           ),
@@ -98,7 +107,9 @@ class TileBackWidget extends StatelessWidget {
         color: const Color(0xFF374151),
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: const Color(0xFF4B5563), width: 1.5),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 3)],
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 3),
+        ],
       ),
     );
   }

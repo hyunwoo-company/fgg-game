@@ -73,6 +73,10 @@ export interface RoundResult {
 
 export interface ClientGameState extends Omit<GameState, 'players'> {
   players: ClientPlayer[];
+  /** 해당 라운드 설정: 도중 인원이 줄어도 유지됨. */
+  config?: GameConfig;
+  /** 전원 패스/재접속 후에도 라운드 최초 선과 새 선을 구분. */
+  hasPlayedThisRound?: boolean;
 }
 
 export interface ClientPlayer extends Omit<Player, 'hand'> {

@@ -1,5 +1,5 @@
-import { detectCombination, canPlay } from '@lexio/game-logic';
-import type { Tile, TileCombination, TileNumber } from '@lexio/game-logic';
+import { detectCombination, canPlay, getGameConfig } from '@lexio/game-logic';
+import type { Tile, TileCombination, TileNumber, ClientGameState, GameMode } from '@lexio/game-logic';
 
 function getCombos<T>(arr: T[], size: number): T[][] {
   if (size === 0) return [[]];
@@ -43,8 +43,8 @@ export function findPlayableCombinations(
   });
 }
 
-export function getMaxNumber(playerCount: number): TileNumber {
-  if (playerCount === 3) return 9;
-  if (playerCount === 4) return 13;
-  return 15;
+export function getMaxNumber(state: ClientGameState, mode: GameMode = 'recommended'): TileNumber {
+  if (state.config) return state.config.maxNumber;
+  const count = state.players.length;
+  return getGameConfig(count === 3 || count === 4 ? count : 5, mode).maxNumber;
 }

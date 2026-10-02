@@ -8,7 +8,7 @@ const makePlayer = (id: string, hand: Tile[], chips = 20): Player => ({
   id, name: id, hand, chips, isConnected: true,
 });
 
-describe('calculateScoring (FGG: 1 타일이 페널티)', () => {
+describe('calculateScoring (2 타일이 페널티)', () => {
   it('1등(타일 0개)은 모두에게 받음', () => {
     const players = [
       makePlayer('A', []),           // 1등: 0개
@@ -20,39 +20,39 @@ describe('calculateScoring (FGG: 1 타일이 페널티)', () => {
     expect(aIncome).toBe(5); // B에서 3 + C에서 2
   });
 
-  it('FGG: 숫자 1 타일 1개 보유 시 타일 수 2배 페널티', () => {
+  it('FGG: 숫자 2 타일 1개 보유 시 타일 수 2배 페널티', () => {
     const players = [
       makePlayer('A', []),
-      makePlayer('B', [tile(1, 'cloud'), tile(5, 'sun')]), // 2개지만 1 타일 보유 → 4로 계산
+      makePlayer('B', [tile(2, 'cloud'), tile(5, 'sun')]), // 2개지만 2 타일 보유 → 4로 계산
     ];
     const result = calculateScoring(players);
     const aIncome = result.exchanges.filter((e) => e.toId === 'A').reduce((s, e) => s + e.amount, 0);
     expect(aIncome).toBe(4);
   });
 
-  it('FGG: 숫자 1 타일 2개 보유 시 4배 페널티', () => {
+  it('FGG: 숫자 2 타일 2개 보유 시 4배 페널티', () => {
     const players = [
       makePlayer('A', []),
-      makePlayer('B', [tile(1, 'cloud'), tile(1, 'star'), tile(5, 'sun')]), // 3개, 1타일 2개 → 3*4=12
+      makePlayer('B', [tile(2, 'cloud'), tile(2, 'star'), tile(5, 'sun')]), // 3개, 2타일 2개 → 3*4=12
     ];
     const result = calculateScoring(players);
     const aIncome = result.exchanges.filter((e) => e.toId === 'A').reduce((s, e) => s + e.amount, 0);
     expect(aIncome).toBe(12);
   });
 
-  it('FGG: 페널티 플레이어 목록에 1 보유자 포함', () => {
+  it('FGG: 페널티 플레이어 목록에 2 보유자 포함', () => {
     const players = [
       makePlayer('A', []),
-      makePlayer('B', [tile(1, 'sun'), tile(5, 'moon')]),
+      makePlayer('B', [tile(2, 'sun'), tile(5, 'moon')]),
     ];
     const result = calculateScoring(players);
     expect(result.penalizedPlayers.some((p) => p.playerId === 'B')).toBe(true);
   });
 
-  it('FGG: 2 타일은 페널티 없음 (2가 최약)', () => {
+  it('FGG: 1 타일은 페널티 없음', () => {
     const players = [
       makePlayer('A', []),
-      makePlayer('B', [tile(2, 'sun'), tile(2, 'moon'), tile(5, 'star')]),
+      makePlayer('B', [tile(1, 'sun'), tile(1, 'moon'), tile(5, 'star')]),
     ];
     const result = calculateScoring(players);
     expect(result.penalizedPlayers.length).toBe(0);

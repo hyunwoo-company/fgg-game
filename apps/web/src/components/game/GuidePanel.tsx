@@ -1,6 +1,9 @@
 'use client';
 
 import { Tile } from '@/components/tile/Tile';
+import { SUIT_META } from '@/components/tile/tileAssets';
+import { StraightRules } from '@/components/guide/StraightRules';
+import { SUIT_LABEL } from '@lexio/game-logic';
 import type { Tile as TileType, Suit, TileNumber } from '@lexio/game-logic';
 
 interface GuidePanelProps {
@@ -18,128 +21,24 @@ interface ComboRow {
 }
 
 const COMBOS: ComboRow[] = [
-  {
-    name: '싱글',
-    desc: '1장 — 숫자가 같으면 사신수 우열',
-    low: [{ number: 2, suit: 'cloud' }],
-    high: [{ number: 1, suit: 'sun' }],
-  },
-  {
-    name: '페어',
-    desc: '같은 숫자 2장',
-    low: [
-      { number: 2, suit: 'cloud' },
-      { number: 2, suit: 'star' },
-    ],
-    high: [
-      { number: 1, suit: 'sun' },
-      { number: 1, suit: 'moon' },
-    ],
-  },
-  {
-    name: '트리플',
-    desc: '같은 숫자 3장',
-    low: [
-      { number: 2, suit: 'cloud' },
-      { number: 2, suit: 'star' },
-      { number: 2, suit: 'moon' },
-    ],
-    high: [
-      { number: 1, suit: 'sun' },
-      { number: 1, suit: 'moon' },
-      { number: 1, suit: 'star' },
-    ],
-  },
-  {
-    name: '스트레이트',
-    desc: '연속 5장 · 1과 2는 한 스트레이트에 동시 불가',
-    low: [
-      { number: 3, suit: 'cloud' },
-      { number: 4, suit: 'sun' },
-      { number: 5, suit: 'moon' },
-      { number: 6, suit: 'star' },
-      { number: 7, suit: 'cloud' },
-    ],
-    high: [
-      { number: 12, suit: 'sun' },
-      { number: 13, suit: 'moon' },
-      { number: 14, suit: 'star' },
-      { number: 15, suit: 'cloud' },
-      { number: 1, suit: 'sun' },
-    ],
-  },
-  {
-    name: '플러시',
-    desc: '같은 사신수 5장',
-    low: [
-      { number: 2, suit: 'cloud' },
-      { number: 4, suit: 'cloud' },
-      { number: 6, suit: 'cloud' },
-      { number: 8, suit: 'cloud' },
-      { number: 11, suit: 'cloud' },
-    ],
-    high: [
-      { number: 5, suit: 'sun' },
-      { number: 8, suit: 'sun' },
-      { number: 11, suit: 'sun' },
-      { number: 13, suit: 'sun' },
-      { number: 1, suit: 'sun' },
-    ],
-  },
-  {
-    name: '풀하우스',
-    desc: '트리플 + 페어 · 트리플 숫자로 비교',
-    low: [
-      { number: 3, suit: 'cloud' },
-      { number: 3, suit: 'star' },
-      { number: 3, suit: 'moon' },
-      { number: 2, suit: 'cloud' },
-      { number: 2, suit: 'star' },
-    ],
-    high: [
-      { number: 1, suit: 'sun' },
-      { number: 1, suit: 'moon' },
-      { number: 1, suit: 'star' },
-      { number: 2, suit: 'sun' },
-      { number: 2, suit: 'moon' },
-    ],
-  },
-  {
-    name: '포카드',
-    desc: '같은 숫자 4장 + 1장',
-    low: [
-      { number: 3, suit: 'cloud' },
-      { number: 3, suit: 'star' },
-      { number: 3, suit: 'moon' },
-      { number: 3, suit: 'sun' },
-      { number: 2, suit: 'cloud' },
-    ],
-    high: [
-      { number: 1, suit: 'cloud' },
-      { number: 1, suit: 'star' },
-      { number: 1, suit: 'moon' },
-      { number: 1, suit: 'sun' },
-      { number: 2, suit: 'cloud' },
-    ],
-  },
-  {
-    name: '스트레이트 플러시',
-    desc: '연속 5장 + 같은 사신수',
-    low: [
-      { number: 3, suit: 'cloud' },
-      { number: 4, suit: 'cloud' },
-      { number: 5, suit: 'cloud' },
-      { number: 6, suit: 'cloud' },
-      { number: 7, suit: 'cloud' },
-    ],
-    high: [
-      { number: 12, suit: 'sun' },
-      { number: 13, suit: 'sun' },
-      { number: 14, suit: 'sun' },
-      { number: 15, suit: 'sun' },
-      { number: 1, suit: 'sun' },
-    ],
-  },
+  { name: '싱글', desc: '1장 — 숫자가 같으면 사신수 우열', low: [{ number: 3, suit: 'cloud' }], high: [{ number: 2, suit: 'sun' }] },
+  { name: '페어', desc: '같은 숫자 2장', low: [{ number: 3, suit: 'cloud' }, { number: 3, suit: 'star' }], high: [{ number: 2, suit: 'sun' }, { number: 2, suit: 'moon' }] },
+  { name: '트리플', desc: '같은 숫자 3장', low: [{ number: 3, suit: 'cloud' }, { number: 3, suit: 'star' }, { number: 3, suit: 'moon' }], high: [{ number: 2, suit: 'sun' }, { number: 2, suit: 'moon' }, { number: 2, suit: 'star' }] },
+  { name: '스트레이트', desc: '연속 5장 · 1-2-3-4-5 최강 · 1 뒤에 2 불가',
+    low: [{ number: 3, suit: 'cloud' }, { number: 4, suit: 'sun' }, { number: 5, suit: 'moon' }, { number: 6, suit: 'star' }, { number: 7, suit: 'cloud' }],
+    high: [{ number: 1, suit: 'moon' }, { number: 2, suit: 'sun' }, { number: 3, suit: 'star' }, { number: 4, suit: 'cloud' }, { number: 5, suit: 'moon' }] },
+  { name: '플러시', desc: '같은 사신수 5장',
+    low: [{ number: 3, suit: 'cloud' }, { number: 4, suit: 'cloud' }, { number: 5, suit: 'cloud' }, { number: 6, suit: 'cloud' }, { number: 8, suit: 'cloud' }],
+    high: [{ number: 5, suit: 'sun' }, { number: 8, suit: 'sun' }, { number: 11, suit: 'sun' }, { number: 1, suit: 'sun' }, { number: 2, suit: 'sun' }] },
+  { name: '풀하우스', desc: '트리플 + 페어 · 트리플 숫자로 비교',
+    low: [{ number: 3, suit: 'cloud' }, { number: 3, suit: 'star' }, { number: 3, suit: 'moon' }, { number: 4, suit: 'cloud' }, { number: 4, suit: 'star' }],
+    high: [{ number: 2, suit: 'sun' }, { number: 2, suit: 'moon' }, { number: 2, suit: 'star' }, { number: 1, suit: 'sun' }, { number: 1, suit: 'moon' }] },
+  { name: '포카드', desc: '같은 숫자 4장 + 1장',
+    low: [{ number: 3, suit: 'cloud' }, { number: 3, suit: 'star' }, { number: 3, suit: 'moon' }, { number: 3, suit: 'sun' }, { number: 4, suit: 'cloud' }],
+    high: [{ number: 2, suit: 'cloud' }, { number: 2, suit: 'star' }, { number: 2, suit: 'moon' }, { number: 2, suit: 'sun' }, { number: 1, suit: 'cloud' }] },
+  { name: '스트레이트 플러시', desc: '연속 5장 + 같은 사신수',
+    low: [{ number: 3, suit: 'cloud' }, { number: 4, suit: 'cloud' }, { number: 5, suit: 'cloud' }, { number: 6, suit: 'cloud' }, { number: 7, suit: 'cloud' }],
+    high: [{ number: 1, suit: 'sun' }, { number: 2, suit: 'sun' }, { number: 3, suit: 'sun' }, { number: 4, suit: 'sun' }, { number: 5, suit: 'sun' }] },
 ];
 
 function asTile(e: ExampleTile, idx: number): TileType {
@@ -248,7 +147,7 @@ export function GuidePanel({ open, onClose }: GuidePanelProps) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
             gap: 6,
             marginBottom: 12,
           }}
@@ -256,13 +155,13 @@ export function GuidePanel({ open, onClose }: GuidePanelProps) {
           <div style={{ padding: '6px 10px', background: 'rgba(212,166,86,0.08)', borderRadius: 6, border: '1px solid var(--fgg-line)' }}>
             <div className="fgg-eyebrow" style={{ fontSize: 9, marginBottom: 2 }}>숫자</div>
             <div style={{ fontFamily: 'var(--fgg-font-num)', fontSize: 11 }}>
-              <strong style={{ color: 'var(--fgg-gold-bright)' }}>1</strong> &gt; 15 &gt; 14 &gt; … &gt; 3 &gt; <strong>2</strong>
+              <strong style={{ color: 'var(--fgg-gold-bright)' }}>2</strong> &gt; 1 &gt; 15 &gt; … &gt; 4 &gt; 3
             </div>
           </div>
           <div style={{ padding: '6px 10px', background: 'rgba(212,166,86,0.08)', borderRadius: 6, border: '1px solid var(--fgg-line)' }}>
             <div className="fgg-eyebrow" style={{ fontSize: 9, marginBottom: 2 }}>사신수</div>
             <div style={{ fontSize: 10, lineHeight: 1.5 }}>
-              <span style={{ color: '#C8323D' }}>주작</span> &gt; <span style={{ color: '#2A8C56' }}>현무</span> &gt; <span style={{ color: '#D88438' }}>백호</span> &gt; <span style={{ color: '#3A5A8C' }}>청룡</span>
+              {(['sun', 'moon', 'star', 'cloud'] as Suit[]).map((suit, i) => <span key={suit} style={{ color: suit === 'cloud' ? 'var(--fgg-gold)' : SUIT_META[suit].color }}>{i > 0 && ' > '}{SUIT_LABEL[suit]}</span>)}
             </div>
           </div>
         </div>
@@ -281,9 +180,11 @@ export function GuidePanel({ open, onClose }: GuidePanelProps) {
           }}
         >
           <strong style={{ color: 'var(--fgg-gold-bright)' }}>비교 규칙</strong> · 같은 종류끼리 만났을 땐
-          <strong style={{ color: 'var(--fgg-text)' }}> max 카드 숫자</strong>가 우선이고, 숫자가 같을 때만
+          <strong style={{ color: 'var(--fgg-text)' }}> 가장 강한 타일 숫자</strong>가 우선이고, 숫자가 같을 때만
           <strong style={{ color: 'var(--fgg-text)' }}> 사신수 우열</strong>로 tie-break.
           <br />
+          풀하우스는 트리플, 포카드는 4장 숫자로 비교합니다.<br />
+          스트레이트: 1-2-3-4-5 &gt; 2-3-4-5-6 &gt; …-15-1 &gt; 일반 (1 뒤에 2 불가).<br />
           5장 콤보의 종류 자체는 <span style={{ color: 'var(--fgg-gold)' }}>스트레이트 &lt; 플러시 &lt; 풀하우스 &lt; 포카드 &lt; 스트레이트플러시</span>.
         </div>
 
@@ -338,21 +239,20 @@ export function GuidePanel({ open, onClose }: GuidePanelProps) {
           ))}
         </div>
 
+        <StraightRules />
+
         {/* 선/패널티 룰 */}
         <div style={{ marginTop: 14 }}>
           <div className="fgg-eyebrow" style={{ fontSize: 9, marginBottom: 6 }}>선 / 점수 룰</div>
           <ul style={{ margin: 0, paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 4, lineHeight: 1.5 }}>
             <li>
-              <strong style={{ color: 'var(--fgg-gold-bright)' }}>1라운드 첫 선</strong>: 청룡 2 보유자.
-            </li>
-            <li>
-              <strong style={{ color: 'var(--fgg-gold-bright)' }}>다음 라운드 선</strong>: 직전 라운드 1등. 어떤 패든 자유롭게 시작 가능.
+              <strong style={{ color: 'var(--fgg-gold-bright)' }}>선</strong>: 매 라운드 백호 3 보유자 (꼭 낼 필요 없음).
             </li>
             <li>
               <strong>4장 콤보</strong>는 절대 불가. 1/2/3/5장만.
             </li>
             <li>
-              <strong>패널티</strong>: 라운드 종료 시 손에 1을 가지고 있으면 남은 패 ×2^n.
+              <strong>패널티</strong>: 라운드 종료 시 손에 2가 남으면 남은 패 ×2의 n제곱 (1장 ×2, 2장 ×4, 3장 ×8).
             </li>
             <li>나머지 모두 패스 → 마지막 낸 사람이 새 선.</li>
           </ul>

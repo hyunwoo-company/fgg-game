@@ -23,7 +23,7 @@ export function ActionBar({
   onSort,
   sortMode = 'number',
 }: ActionBarProps) {
-  const { gameState, myId, selectTiles, selectedTileIds } = useGameStore();
+  const { gameState, roomInfo, myId, selectTiles, selectedTileIds } = useGameStore();
   const hintIndexRef = useRef(0);
 
   const myHand = useMemo(() => {
@@ -33,9 +33,9 @@ export function ActionBar({
 
   const suggestions = useMemo(() => {
     if (!isMyTurn || !gameState || myHand.length === 0) return [];
-    const maxNumber = getMaxNumber(gameState.players.length);
+    const maxNumber = getMaxNumber(gameState, roomInfo?.mode);
     return findPlayableCombinations(myHand, gameState.lastPlay, maxNumber);
-  }, [isMyTurn, gameState, myHand]);
+  }, [isMyTurn, gameState, roomInfo?.mode, myHand]);
 
   // 클라이언트 측 즉시 검증 — 선택한 패가 valid combination인지 + lastPlay보다 강한지
   const playValidity = useMemo<{
@@ -48,14 +48,14 @@ export function ActionBar({
     if (!gameState) return { canPlay: false, reason: 'noSelection' };
     const selectedTiles = myHand.filter((t) => selectedTileIds.includes(t.id));
     if (selectedTiles.length === 0) return { canPlay: false, reason: 'noSelection' };
-    const maxNumber = getMaxNumber(gameState.players.length);
+    const maxNumber = getMaxNumber(gameState, roomInfo?.mode);
     const combo = detectCombination(selectedTiles, maxNumber);
     if (!combo) return { canPlay: false, reason: 'invalidCombo' };
     if (gameState.lastPlay && !canPlayCombo(combo, gameState.lastPlay)) {
       return { canPlay: false, reason: 'weakerThanLast' };
     }
     return { canPlay: true };
-  }, [isMyTurn, selectedCount, gameState, myHand, selectedTileIds]);
+  }, [isMyTurn, selectedCount, gameState, roomInfo?.mode, myHand, selectedTileIds]);
 
   // 추천 cycle: [combo0, combo1, ..., comboN-1, deselect] → 다시 처음부터
   const handleHint = () => {
