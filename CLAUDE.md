@@ -246,11 +246,11 @@ Patrol MCP: `.mcp.json` (프로젝트 루트) + `.claude/run-patrol` (런처). `
 - 본문: Pretendard / Noto Sans KR
 - 숫자: Cormorant Garamond (lining)
 
-### 타일 디자인
-- 마작패 스타일 (아이보리 본체 + 그림자 stack)
-- 사신수 일러스트 중앙 (`/public/sasinsoo/jujak.png` 등) — 사용자 제공
-- 좌상단 + 우하단(180° 회전) 두 곳에 숫자
-- 1번 ace는 골드 외곽 + glow 차별화
+### 타일 디자인 (`apps/web/src/components/tile/`)
+- 3D 상아 몸체 PNG(3dsvg 렌더) 위에 앞면 overlay: 상아 여백 + 금선 액자 패널 안에 사신수별 AI 민화풍 배경 + 배경 제거한 사신수 일러스트
+- 좌상단 + 우하단(180° 회전) 숫자 — 상아 숫자판 위 suit 색
+- 최강 숫자(`TOP_NUMBER`, `tileAssets.ts`, 현재 2)는 특별 타일: 금빛 몸체 + 2중 금선·모서리 장식 + 금 숫자판 + glow + 전용 배경·'각성' 일러스트
+- 에셋: `public/tiles/` (body / bg / bg-top / creature / creature-top, WebP)
 - 숫자 색상: 주작=빨강 / 현무=초록 / 백호=검정(흰 호랑이용) / 청룡=푸른
 
 ---
