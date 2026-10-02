@@ -155,86 +155,25 @@ body {
   .fgg-combo-card__tiles::-webkit-scrollbar { display: none; }
 }
 
-/* ===== FGG 타일 — 마작패 스타일 (아이보리 본체 + 그림자) ===== */
+/* ===== FGG 타일 — 3D 몸체 PNG(두께·바닥 그림자 포함) 위 앞면 overlay =====
+ * 두께/그림자는 몸체 이미지(components/tile)가 그리므로 box-shadow 스택은 두지 않는다.
+ * 선택 lift 는 인라인 CSS 변수(--fgg-tile-lift)로 받는다 — 인라인 transform 은 :hover 를 덮어버리므로. */
 .fgg-tile {
   position: relative;
+  display: block;
+  flex-shrink: 0;
   padding: 0;
   border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  overflow: hidden;
-  /* side-edge 그림자 + 베이스 stack + 긴 ground shadow */
-  box-shadow:
-    inset 2px 0 4px -1px rgba(140, 110, 60, 0.18),
-    inset -2px 0 4px -1px rgba(140, 110, 60, 0.22),
-    inset 0 -3px 5px -1px rgba(120, 90, 40, 0.32),
-    inset 0 1px 0 rgba(255, 252, 240, 0.9),
-    0 1px 0 #C9B07F,
-    0 3px 0 #A88E5E,
-    0 5px 0 #806B45,
-    0 12px 14px -2px rgba(0,0,0,0.45),
-    0 22px 28px -6px rgba(0,0,0,0.5),
-    0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 160ms cubic-bezier(.2,.8,.2,1), box-shadow 160ms;
+  background: none;
+  overflow: visible;
+  isolation: isolate;
+  transform: translateY(var(--fgg-tile-lift, 0px));
+  transition: transform 160ms cubic-bezier(.2,.8,.2,1);
 }
 
-.fgg-tile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 35% at 32% 18%, rgba(255,255,255,0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 20% at 75% 12%, rgba(255,255,255,0.25) 0%, transparent 65%),
-    linear-gradient(180deg, transparent 0%, transparent 70%, rgba(140, 110, 60, 0.08) 100%);
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.fgg-tile.is-clickable:hover {
+.fgg-tile.is-clickable:not(.is-selected):hover {
   transform: translateY(-6px);
-  box-shadow:
-    inset 2px 0 4px -1px rgba(140, 110, 60, 0.18),
-    inset -2px 0 4px -1px rgba(140, 110, 60, 0.22),
-    inset 0 -3px 5px -1px rgba(120, 90, 40, 0.32),
-    inset 0 1px 0 rgba(255, 252, 240, 0.9),
-    0 1px 0 #C9B07F,
-    0 3px 0 #A88E5E,
-    0 5px 0 #806B45,
-    0 18px 18px -2px rgba(0,0,0,0.5),
-    0 28px 32px -6px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(212, 166, 86, 0.5);
 }
-
-.fgg-tile.is-selected {
-  box-shadow:
-    inset 2px 0 4px -1px rgba(140, 110, 60, 0.18),
-    inset -2px 0 4px -1px rgba(140, 110, 60, 0.22),
-    inset 0 -3px 5px -1px rgba(120, 90, 40, 0.32),
-    inset 0 1px 0 rgba(255, 252, 240, 0.9),
-    0 1px 0 #C9B07F,
-    0 3px 0 #A88E5E,
-    0 5px 0 #806B45,
-    0 22px 24px -2px rgba(0,0,0,0.55),
-    0 32px 38px -6px rgba(0,0,0,0.6),
-    0 0 0 2px var(--fgg-gold),
-    0 0 22px rgba(242, 200, 120, 0.55);
-}
-
-/* 뒷면: 아이보리 + 옅은 빗금 (펠트 위에 사라지지 않도록) */
-.fgg-tile--back {
-  background: transparent;
-  box-shadow:
-    0 1px 0 -0px #DCC79A,
-    0 3px 0 -1px #C9B07F,
-    0 5px 0 -2px #A88E5E,
-    0 7px 0 -3px #806B45,
-    0 14px 18px -4px rgba(0,0,0,0.5),
-    0 4px 8px rgba(0,0,0,0.32);
-}
-.fgg-tile--back::before { display: none; }
 
 /* ===== 펠트 테이블 ===== */
 .fgg-felt {
