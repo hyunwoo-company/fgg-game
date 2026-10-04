@@ -106,6 +106,19 @@ PORT=3001
 
 ---
 
+## 웹 자동 배포
+
+Vercel 프로젝트 `fgg-game`은 `hyunwoo-company/fgg-game` 저장소의 `main`을 Production Branch로, `apps/web`을 Root Directory로 사용합니다.
+
+- 계정의 Authentication 로그인 연결과 프로젝트의 **Project Settings > Git** 저장소 연결은 각각 확인해야 합니다.
+- GitHub 계정 변경 후에는 커밋 작성자의 GitHub 계정, Vercel 로그인 연결 계정, 프로젝트 소속 팀 접근 권한을 함께 점검합니다.
+- 연결 오류가 지속되면 GitHub 조직의 Installed GitHub Apps에서 Vercel의 `fgg-game` 접근 권한을 확인한 뒤, **Project Settings > Git**에서 동일 저장소를 재연결합니다.
+- 새 `main` 커밋을 push한 뒤 `source=git`인 Production 배포가 `READY`인지, `meta.githubCommitSha`가 원격 `main` SHA와 같은지 확인합니다. CLI 배포 성공만으로 Git 자동 배포를 검증하지 않습니다.
+
+2026-10-04 동일 저장소 재연결 후 프로젝트의 `gitCredentialId` 갱신을 확인했습니다. 저장소, `main`, `apps/web` 설정은 유지됐습니다.
+
+---
+
 ## 프로젝트 구조
 
 ```
