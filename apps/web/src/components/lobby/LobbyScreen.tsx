@@ -523,7 +523,7 @@ export function LobbyScreen() {
               transition: 'border-color 120ms, color 120ms, background 120ms',
             }}
           >
-            📖 족보 보기
+            족보 보기
           </Link>
           <Link
             href="/tutorial"
@@ -543,7 +543,7 @@ export function LobbyScreen() {
               transition: 'border-color 120ms, color 120ms, background 120ms',
             }}
           >
-            🎓 튜토리얼
+            튜토리얼
           </Link>
         </div>
       </div>

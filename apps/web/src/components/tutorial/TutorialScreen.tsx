@@ -147,12 +147,13 @@ function VisualSuits() {
             <div
               style={{
                 fontSize: 10,
+                minHeight: 15,
                 color: 'var(--fgg-text-muted)',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
               }}
             >
-              {i === 0 ? '가장 강함' : i === 3 ? '가장 약함' : s}
+              {i === 0 ? '가장 강함' : i === 3 ? '가장 약함' : null}
             </div>
           </div>
         ))}
@@ -179,18 +180,18 @@ function VisualSuits() {
 function VisualNumbers() {
   const seq = (Object.keys(NUMBER_RANK).map(Number) as TileNumber[]).sort((a, b) => NUMBER_RANK[b] - NUMBER_RANK[a]);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, width: '100%', minWidth: 0 }}>
       <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, textAlign: 'center' }}>
           <Tile tile={{ id: 'sun-2', number: TOP_NUMBER, suit: 'sun' }} size="lg" />
-          <p style={{ fontSize: 12, color: 'var(--fgg-gold)' }}>주작 2 · 최강</p>
+          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.5, color: 'var(--fgg-gold)' }}>주작 2 · 최강</p>
         </div>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, textAlign: 'center' }}>
           <Tile tile={{ id: 'cloud-3', number: 3, suit: 'cloud' }} size="lg" />
-          <p style={{ fontSize: 12, color: 'var(--fgg-text-dim)' }}>백호 3 · 최약</p>
+          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.5, color: 'var(--fgg-text-dim)' }}>백호 3 · 최약</p>
         </div>
       </div>
-      <div style={{ fontSize: 12, color: 'var(--fgg-gold)', textAlign: 'center', lineHeight: 1.6 }}>{seq.join(' › ')}</div>
+      <div style={{ fontSize: 14, color: 'var(--fgg-gold)', textAlign: 'center', textWrap: 'balance', lineHeight: 1.6 }}>{seq.join(' › ')}</div>
     </div>
   );
 }
@@ -386,7 +387,8 @@ export function TutorialScreen() {
   return (
     <div
       style={{
-        minHeight: '100vh',
+        minHeight: '100dvh',
+        paddingTop: 'env(safe-area-inset-top, 0px)',
         background:
           'radial-gradient(ellipse at top, rgba(212,166,86,0.06) 0%, transparent 55%), var(--fgg-bg-0)',
         color: 'var(--fgg-text)',
@@ -398,6 +400,8 @@ export function TutorialScreen() {
       <div
         style={{
           padding: 'clamp(12px, 3vw, 20px) clamp(14px, 4vw, 32px)',
+          paddingLeft: 'max(clamp(14px, 4vw, 32px), env(safe-area-inset-left, 0px))',
+          paddingRight: 'max(clamp(14px, 4vw, 32px), env(safe-area-inset-right, 0px))',
           display: 'flex',
           alignItems: 'center',
           gap: 14,
@@ -410,6 +414,7 @@ export function TutorialScreen() {
           className="fgg-btn"
           style={{
             padding: '8px 14px',
+            minHeight: 44,
             fontSize: 11,
             textDecoration: 'none',
           }}
@@ -453,7 +458,9 @@ export function TutorialScreen() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
           alignItems: 'start',
           padding: 'clamp(20px, 5vw, 40px) clamp(18px, 5vw, 60px)',
-          paddingBottom: 'calc(clamp(20px, 5vw, 40px) + 80px)' /* fixed footer 공간 */,
+          paddingLeft: 'max(clamp(18px, 5vw, 60px), env(safe-area-inset-left, 0px))',
+          paddingRight: 'max(clamp(18px, 5vw, 60px), env(safe-area-inset-right, 0px))',
+          paddingBottom: 'calc(clamp(20px, 5vw, 40px) + 80px + env(safe-area-inset-bottom, 0px))' /* fixed footer 공간 */,
           gap: 'clamp(20px, 4vw, 60px)',
           maxWidth: 1200,
           margin: '0 auto',
@@ -488,7 +495,7 @@ export function TutorialScreen() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', minWidth: 0 }}>
           <StepVisual visual={step.visual} />
         </div>
       </div>
@@ -497,6 +504,9 @@ export function TutorialScreen() {
       <div
         style={{
           padding: 'clamp(12px, 3vw, 20px) clamp(14px, 4vw, 32px)',
+          paddingLeft: 'max(clamp(14px, 4vw, 32px), env(safe-area-inset-left, 0px))',
+          paddingRight: 'max(clamp(14px, 4vw, 32px), env(safe-area-inset-right, 0px))',
+          paddingBottom: 'calc(clamp(12px, 3vw, 20px) + env(safe-area-inset-bottom, 0px))',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -514,7 +524,7 @@ export function TutorialScreen() {
           className="fgg-btn"
           onClick={() => setCurrent((c) => Math.max(0, c - 1))}
           disabled={isFirst}
-          style={{ padding: '10px 18px', fontSize: 13 }}
+          style={{ padding: '10px 18px', minHeight: 44, fontSize: 13 }}
         >
           ← 이전
         </button>
