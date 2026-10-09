@@ -1,7 +1,7 @@
 'use client';
 
 import { TileBack } from '@/components/tile/Tile';
-import type { ClientPlayer } from '@lexio/game-logic';
+import type { ClientPlayer } from '@fgg/game-logic';
 
 interface OpponentAreaProps {
   player: ClientPlayer;

@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lexio_app/game/comparator.dart';
-import 'package:lexio_app/game/constants.dart';
-import 'package:lexio_app/game/models/tile.dart';
-import 'package:lexio_app/game/models/tile_combination.dart';
-import 'package:lexio_app/game/validator.dart';
+import 'package:fgg_app/game/comparator.dart';
+import 'package:fgg_app/game/constants.dart';
+import 'package:fgg_app/game/models/tile.dart';
+import 'package:fgg_app/game/models/tile_combination.dart';
+import 'package:fgg_app/game/validator.dart';
 
 List<Tile> hand(List<int> numbers, {Suit? suit, Suit topSuit = Suit.sun}) {
   if (numbers.isEmpty) return [];

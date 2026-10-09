@@ -17,7 +17,7 @@ importers:
 
   apps/server:
     dependencies:
-      '@lexio/game-logic':
+      '@fgg/game-logic':
         specifier: workspace:*
         version: link:../../packages/game-logic
       express:
@@ -51,7 +51,7 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@18.3.1)
-      '@lexio/game-logic':
+      '@fgg/game-logic':
         specifier: workspace:*
         version: link:../../packages/game-logic
       clsx:

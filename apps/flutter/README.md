@@ -1,4 +1,4 @@
-# lexio_app
+# FGG (사신수 게임)
 
 A new Flutter project.
 

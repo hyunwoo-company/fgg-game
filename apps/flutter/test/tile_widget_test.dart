@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lexio_app/game/models/tile.dart';
-import 'package:lexio_app/widgets/tile_widget.dart';
+import 'package:fgg_app/game/models/tile.dart';
+import 'package:fgg_app/widgets/tile_widget.dart';
 
 void main() {
   for (final entry in {

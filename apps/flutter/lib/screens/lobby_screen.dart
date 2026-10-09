@@ -91,7 +91,7 @@ class _LobbyScreenState extends ConsumerState<LobbyScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('LEXIO', style: TextStyle(fontSize: 56, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: 4)),
+              const Text('FGG', style: TextStyle(fontSize: 56, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: 4)),
               const SizedBox(height: 6),
               const Text('마작 타일 × 포커 족보 클라이밍 게임', style: TextStyle(color: Color(0xFF9CA3AF))),
               const SizedBox(height: 40),

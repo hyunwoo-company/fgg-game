@@ -1,18 +1,19 @@
 {
-  "name": "@lexio/web",
+  "name": "@fgg/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:storage": "node test/clientId.test.cjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@lexio/game-logic": "workspace:*",
+    "@fgg/game-logic": "workspace:*",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.0",
     "next": "^14.2.0",

@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import type { Tile as TileType, Suit, TileNumber } from '@lexio/game-logic';
+import type { Tile as TileType, Suit, TileNumber } from '@fgg/game-logic';
 import { Tile } from '@/components/tile/Tile';
 import { SUIT_META } from '@/components/tile/tileAssets';
 import { StraightRules } from '@/components/guide/StraightRules';
-import { NUMBER_RANK, TOP_NUMBER } from '@lexio/game-logic';
+import { NUMBER_RANK, TOP_NUMBER } from '@fgg/game-logic';
 
 const SASIN = SUIT_META;
 

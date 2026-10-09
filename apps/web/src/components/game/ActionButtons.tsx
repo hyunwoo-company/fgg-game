@@ -3,7 +3,7 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useGameStore } from '@/store/gameStore';
 import { findPlayableCombinations, getMaxNumber } from '@/lib/suggestions';
-import type { Tile } from '@lexio/game-logic';
+import type { Tile } from '@fgg/game-logic';
 
 interface ActionButtonsProps {
   isMyTurn: boolean;

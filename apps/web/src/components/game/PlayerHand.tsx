@@ -20,8 +20,8 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { Tile } from '@/components/tile/Tile';
 import { useGameStore } from '@/store/gameStore';
-import { NUMBER_RANK, SUIT_RANK } from '@lexio/game-logic';
-import type { Tile as TileType } from '@lexio/game-logic';
+import { NUMBER_RANK, SUIT_RANK } from '@fgg/game-logic';
+import type { Tile as TileType } from '@fgg/game-logic';
 
 interface PlayerHandProps {
   hand: TileType[];

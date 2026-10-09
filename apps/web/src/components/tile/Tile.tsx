@@ -6,7 +6,7 @@
 // 레이아웃 박스는 기존과 같은 SIZE.w × SIZE.h — 3D 두께(약 3~5px)·바닥 그림자는 박스 아래로 시각적으로만 나온다.
 
 import type { CSSProperties } from 'react';
-import type { Tile as TileType } from '@lexio/game-logic';
+import type { Tile as TileType } from '@fgg/game-logic';
 import {
   SUIT_META,
   TILE_GEOMETRY,

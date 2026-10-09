@@ -3,7 +3,7 @@
 // 앞면 박스·액자 레이어에는 z-index 를 주지 않아 stacking context 를 만들지 않는다.
 
 import type { CSSProperties, ReactNode } from 'react';
-import type { Tile as TileType } from '@lexio/game-logic';
+import type { Tile as TileType } from '@fgg/game-logic';
 import { SUIT_META, bodySrc, type BodyKind, type TileGeometry, type TileSizeSpec } from './tileAssets';
 import {
   FRAME_GOLD,

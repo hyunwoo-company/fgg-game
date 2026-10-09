@@ -3,7 +3,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
-import 'package:lexio_app/main.dart' as app;
+import 'package:fgg_app/main.dart' as app;
 
 void main() {
   patrolTest(
@@ -12,8 +12,8 @@ void main() {
       app.main();
       await $.pumpAndSettle();
 
-      await $(find.text('LEXIO')).waitUntilVisible();
-      expect(find.text('LEXIO'), findsOneWidget);
+      await $(find.text('FGG')).waitUntilVisible();
+      expect(find.text('FGG'), findsOneWidget);
     },
   );
 
@@ -53,7 +53,7 @@ void main() {
       await $.pumpAndSettle();
 
       // 여전히 로비 화면 유지
-      expect(find.text('LEXIO'), findsOneWidget);
+      expect(find.text('FGG'), findsOneWidget);
     },
   );
 }

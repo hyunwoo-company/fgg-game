@@ -1,7 +1,7 @@
 'use client';
 
 import { Tile } from '@/components/tile/Tile';
-import type { TileCombination } from '@lexio/game-logic';
+import type { TileCombination } from '@fgg/game-logic';
 
 const COMBO_LABEL: Record<string, string> = {
   single: '싱글',

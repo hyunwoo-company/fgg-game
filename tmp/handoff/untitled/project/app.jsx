@@ -87,7 +87,7 @@ function MobilePortraitFrame({ width, height, children }) {
   );
 }
 
-function DesktopFrame({ width, height, children, title = 'lexio.app' }) {
+function DesktopFrame({ width, height, children, title = 'fgg.app' }) {
   return (
     <div style={{
       width: width + 2,
@@ -137,7 +137,7 @@ function App() {
         {/* === Section 0 — INTERACTIVE PLAYABLE DEMO === */}
         <DCSection id="playable" title="🎮 인터랙티브 플레이 데모 — 직접 클릭해보세요">
           <DCArtboard id="dt-playable" label="플레이 가능한 인게임 (실제 동작)" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app/play (live demo)">
+            <DesktopFrame width={1280} height={800} title="fgg.app/play (live demo)">
               <PlayableDemo width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
@@ -146,7 +146,7 @@ function App() {
         {/* === Section 1 — IN-GAME (the main focus) === */}
         <DCSection id="ingame" title="인게임 — 메인 플레이 화면">
           <DCArtboard id="dt-ingame" label={`데스크톱 웹 · ${pc}인전`} width={1364} height={842}>
-            <DesktopFrame width={1362} height={806} title={`lexio.app/room/LX-2847`}>
+            <DesktopFrame width={1362} height={806} title={`fgg.app/room/LX-2847`}>
               <GameScreen
                 playerCount={pc}
                 density={tweaks.density}
@@ -165,13 +165,13 @@ function App() {
           </DCArtboard>
 
           <DCArtboard id="ingame-3p" label="3인전 레이아웃" width={1364} height={842}>
-            <DesktopFrame width={1362} height={806} title="lexio.app · 3인전">
+            <DesktopFrame width={1362} height={806} title="fgg.app · 3인전">
               <GameScreen playerCount={3} density={tweaks.density} variant={tweaks.tableVariant} width={1362} height={806} />
             </DesktopFrame>
           </DCArtboard>
 
           <DCArtboard id="ingame-5p" label="5인전 레이아웃" width={1364} height={842}>
-            <DesktopFrame width={1362} height={806} title="lexio.app · 5인전">
+            <DesktopFrame width={1362} height={806} title="fgg.app · 5인전">
               <GameScreen playerCount={5} density={tweaks.density} variant={tweaks.tableVariant} width={1362} height={806} />
             </DesktopFrame>
           </DCArtboard>
@@ -180,7 +180,7 @@ function App() {
         {/* === Section 2 — Lobby + Rooms === */}
         <DCSection id="lobby" title="로비 · 방 만들기 · 대기실">
           <DCArtboard id="dt-lobby" label="데스크톱 웹 — 로비" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app">
+            <DesktopFrame width={1280} height={800} title="fgg.app">
               <LobbyScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
@@ -192,7 +192,7 @@ function App() {
           </DCArtboard>
 
           <DCArtboard id="dt-waiting" label="데스크톱 — 대기실" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app/room/LX-2847">
+            <DesktopFrame width={1280} height={800} title="fgg.app/room/LX-2847">
               <WaitingRoomScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
@@ -201,13 +201,13 @@ function App() {
         {/* === Section 3 — Results === */}
         <DCSection id="results" title="라운드 정산 · 최종 결과">
           <DCArtboard id="dt-round" label="라운드 정산" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app · round 3 결과">
+            <DesktopFrame width={1280} height={800} title="fgg.app · round 3 결과">
               <ScoreSettlementScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
 
           <DCArtboard id="dt-final" label="최종 결과" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app · 게임 종료">
+            <DesktopFrame width={1280} height={800} title="fgg.app · 게임 종료">
               <FinalResultScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
@@ -216,19 +216,19 @@ function App() {
         {/* === Section 4 — Guide & Tutorial & Profile === */}
         <DCSection id="guide" title="가이드 · 튜토리얼 · 프로필">
           <DCArtboard id="dt-guide" label="족보 가이드" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app/guide">
+            <DesktopFrame width={1280} height={800} title="fgg.app/guide">
               <HandGuideScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
 
           <DCArtboard id="dt-tutorial" label="튜토리얼" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app/tutorial">
+            <DesktopFrame width={1280} height={800} title="fgg.app/tutorial">
               <TutorialScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>
 
           <DCArtboard id="dt-profile" label="프로필 / 통계" width={1282} height={836}>
-            <DesktopFrame width={1280} height={800} title="lexio.app/profile">
+            <DesktopFrame width={1280} height={800} title="fgg.app/profile">
               <ProfileScreen width={1280} height={800} />
             </DesktopFrame>
           </DCArtboard>

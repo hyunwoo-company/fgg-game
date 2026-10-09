@@ -1,5 +1,5 @@
-import { detectCombination, getGameConfig } from '@lexio/game-logic';
-import type { ClientGameState, Tile, ClientPlayer, TileCombination } from '@lexio/game-logic';
+import { detectCombination, getGameConfig } from '@fgg/game-logic';
+import type { ClientGameState, Tile, ClientPlayer, TileCombination } from '@fgg/game-logic';
 
 const t = (number: number, suit: 'sun' | 'moon' | 'star' | 'cloud'): Tile => ({
   id: `${suit}-${number}`,

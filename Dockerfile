@@ -18,8 +18,8 @@ COPY package.json pnpm-workspace.yaml turbo.json ./
 COPY packages/game-logic/ ./packages/game-logic/
 COPY apps/server/ ./apps/server/
 # game-logic 먼저 빌드 후 server 빌드
-RUN pnpm --filter @lexio/game-logic build
-RUN pnpm --filter @lexio/server build
+RUN pnpm --filter @fgg/game-logic build
+RUN pnpm --filter @fgg/server build
 
 # Stage 3: runner (production)
 FROM node:20-alpine AS runner

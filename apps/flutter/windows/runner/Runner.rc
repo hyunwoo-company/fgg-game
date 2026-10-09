@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.lexio" "\0"
-            VALUE "FileDescription", "lexio_app" "\0"
+            VALUE "CompanyName", "com.fgg" "\0"
+            VALUE "FileDescription", "FGG" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "lexio_app" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.lexio. All rights reserved." "\0"
-            VALUE "OriginalFilename", "lexio_app.exe" "\0"
-            VALUE "ProductName", "lexio_app" "\0"
+            VALUE "InternalName", "fgg_app" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.fgg. All rights reserved." "\0"
+            VALUE "OriginalFilename", "fgg_app.exe" "\0"
+            VALUE "ProductName", "FGG" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

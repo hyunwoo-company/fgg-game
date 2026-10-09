@@ -1,6 +1,6 @@
 # FGG (Four Guardian Gods)
 
-> 사신수(주작·청룡·백호·현무) 테마 + 렉시오 룰(2가 최강)의 온라인 멀티플레이 보드게임.
+> 사신수(주작·청룡·백호·현무) 타일로 즐기는 FGG 온라인 멀티플레이 보드게임(2가 최강).
 > 모바일 우선 + 데스크탑 호환.
 
 ---
@@ -70,7 +70,7 @@ fgg-game/
 │   ├── server/            # Node.js + Socket.io 백엔드 (포트 3001)
 │   ├── web/               # Next.js 14 프론트엔드 (포트 3000 / 개발: 3010)
 │   └── flutter/           # Flutter 3.x 앱 (Dart로 게임 로직 재구현)
-├── RULES.md               # 원본 룰 (참고용)
+├── RULES.md               # FGG 사신수 게임 규칙
 └── README.md
 ```
 
@@ -177,7 +177,7 @@ fgg-game/
 
 ### 도메인 취득 시 → Cloudflare Tunnel 전환 가이드
 1. Cloudflare Zero Trust → Public Hostname 추가 (Service: `http://fgg-api:3001`)
-2. `kubectl create secret generic cloudflared-token --from-literal=token=<TOKEN> -n lexio`
+2. `kubectl create secret generic cloudflared-token --from-literal=token=<TOKEN> -n fgg`
 3. `k8s-helm/apps/fgg-api/values.yaml`: service.type ClusterIP, cloudflared.enabled: true
 4. Vercel `NEXT_PUBLIC_SERVER_URL` → 새 도메인
 5. `tailscale funnel off` (hw-01)
@@ -192,7 +192,7 @@ fgg-game/
 cd packages/game-logic && pnpm test
 
 # 서버 dev (3001)
-pnpm --filter @fgg/server dev   # 또는 @lexio/server (구 패키지 이름)
+pnpm --filter @fgg/server dev
 
 # 웹 dev — IPv4 명시 (chrome MCP 호환)
 cd apps/web && pnpm exec next dev -p 3010 -H 0.0.0.0

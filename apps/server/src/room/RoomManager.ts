@@ -1,5 +1,5 @@
 import { Room } from './Room';
-import type { GameMode } from '@lexio/game-logic';
+import type { GameMode } from '@fgg/game-logic';
 
 function generateRoomId(): string {
   return Math.random().toString(36).substring(2, 8).toUpperCase();

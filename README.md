@@ -1,6 +1,6 @@
 # FGG (Four Guardian Gods)
 
-사신수(주작·청룡·백호·현무) 타일 × 포커 족보 클라이밍 보드게임 디지털 구현 — 렉시오 숫자·조합·점수 룰(2가 최강)에 FGG 사신수 테마를 적용한 버전. 사신수 대응은 사용자 지정: 주작(sun) > 청룡(moon) > 현무(star) > 백호(cloud).
+사신수(주작·청룡·백호·현무) 타일 × 포커 족보 클라이밍 보드게임. 숫자 2가 최강이며, 조합 비교와 남은 패에 따른 점수 교환으로 진행합니다. 사신수 대응은 사용자 지정: 주작(sun) > 청룡(moon) > 현무(star) > 백호(cloud).
 
 - **3~5인** 온라인 멀티플레이어
 - **웹 + Flutter 앱** 동시 지원 (크로스 플레이 가능)
@@ -30,7 +30,7 @@ pnpm install
 ### 백엔드 서버 (필수)
 
 ```bash
-pnpm --filter @lexio/server dev
+pnpm --filter @fgg/server dev
 ```
 
 > 포트 3001에서 실행됩니다.
@@ -38,7 +38,7 @@ pnpm --filter @lexio/server dev
 ### 웹 프론트엔드
 
 ```bash
-pnpm --filter @lexio/web dev
+pnpm --filter @fgg/web dev
 ```
 
 > 브라우저에서 http://localhost:3000 접속
@@ -62,7 +62,10 @@ flutter run
 
 ```bash
 # 게임 로직 단위 테스트
-pnpm --filter @lexio/game-logic test
+pnpm --filter @fgg/game-logic test
+
+# 브라우저 ID·세션 마이그레이션 회귀 테스트
+pnpm --filter @fgg/web test:storage
 
 # 전체 테스트
 pnpm test
@@ -74,13 +77,13 @@ pnpm test
 
 ```bash
 # 게임 로직 빌드 (서버가 참조)
-pnpm --filter @lexio/game-logic build
+pnpm --filter @fgg/game-logic build
 
 # 웹 프로덕션 빌드
-pnpm --filter @lexio/web build
+pnpm --filter @fgg/web build
 
 # 서버 프로덕션 빌드
-pnpm --filter @lexio/server build
+pnpm --filter @fgg/server build
 ```
 
 ---

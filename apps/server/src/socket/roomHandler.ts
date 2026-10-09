@@ -1,6 +1,6 @@
 import type { Server, Socket } from 'socket.io';
 import { RoomManager } from '../room/RoomManager';
-import type { GameMode } from '@lexio/game-logic';
+import type { GameMode } from '@fgg/game-logic';
 
 export function registerRoomHandlers(io: Server, socket: Socket, rooms: RoomManager): void {
   // socket.handshake.auth.clientId를 안정적인 플레이어 ID로 사용

@@ -1,4 +1,4 @@
-import type { Tile, TileNumber, Suit } from '@lexio/game-logic';
+import type { Tile, TileNumber, Suit } from '@fgg/game-logic';
 import { Tile as TileView } from '@/components/tile/Tile';
 
 export const STRAIGHT_EXAMPLES: { numbers: TileNumber[]; label: string; valid: boolean }[] = [

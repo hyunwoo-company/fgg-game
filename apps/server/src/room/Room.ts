@@ -1,5 +1,5 @@
 import { GameEngine } from '../game/GameEngine';
-import type { PlayerCount, GameMode } from '@lexio/game-logic';
+import type { PlayerCount, GameMode } from '@fgg/game-logic';
 
 export interface RoomPlayer {
   id: string;       // stable clientId (재연결 시에도 유지)

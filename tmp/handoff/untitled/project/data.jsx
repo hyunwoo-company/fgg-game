@@ -1,4 +1,4 @@
-/* Lexio mock data — sample hands, players, room state */
+/* FGG mock data — sample hands, players, room state */
 
 const SUIT_KEYS = ['cloud', 'star', 'moon', 'sun']; // low → high
 

@@ -9,7 +9,7 @@ const tile = (number: TileNumber, suit: Suit = 'cloud'): Tile => ({ id: `${suit}
 const run = (numbers: TileNumber[], suit?: Suit): Tile[] => numbers.map((n, i) => tile(n, suit ?? suits[i % 4]));
 const strength = (numbers: TileNumber[], max: TileNumber = 15, suit?: Suit) => detectCombination(run(numbers, suit), max)!.strength;
 
-describe('렉시오 확정 규칙', () => {
+describe('FGG 확정 규칙', () => {
   it('숫자와 사신수 서열', () => {
     expect([2, 1, 15, 3].map(n => NUMBER_RANK[n as TileNumber])).toEqual([14, 13, 12, 0]);
     expect(SUIT_LABEL).toEqual({ sun: '주작', moon: '청룡', star: '현무', cloud: '백호' });

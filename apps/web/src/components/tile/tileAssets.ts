@@ -4,9 +4,9 @@
 //   bg/ bg-top/  AI 생성 민화풍 배경 (일반 / 최강 숫자)
 //   creature/ creature-top/  배경 제거한 사신수 일러스트 (일반 / 최강 숫자)
 
-import type { Suit, Tile as TileType } from '@lexio/game-logic';
+import type { Suit, Tile as TileType } from '@fgg/game-logic';
 
-import { TOP_NUMBER } from '@lexio/game-logic';
+import { TOP_NUMBER } from '@fgg/game-logic';
 
 export function isTopTile(tile: TileType): boolean {
   return tile.number === TOP_NUMBER;

@@ -67,7 +67,7 @@ class _RoomScreenState extends ConsumerState<RoomScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('LEXIO', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: Colors.white)),
+              const Text('FGG', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: Colors.white)),
               const SizedBox(height: 4),
               const Text('대기실', style: TextStyle(color: Color(0xFF9CA3AF))),
               const SizedBox(height: 28),

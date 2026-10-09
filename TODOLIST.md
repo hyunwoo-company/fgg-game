@@ -11,8 +11,8 @@
 - [x] Phase 5: Flutter 앱 — 게임 로직 구현
 - [x] Phase 6: Flutter 앱 — UI 구현 (로비/대기실/게임/점수)
 - [x] E2E 테스트 설정 (Patrol 4.x + Patrol MCP)
-- [x] GitHub 저장소 생성 및 초기 푸시 (hyunwoo-company/lexio)
-- [x] Vercel 웹 배포 완료 → https://lexio-web-inky.vercel.app
+- [x] GitHub 저장소 생성 및 초기 푸시 (hyunwoo-company/fgg-game)
+- [x] Vercel 웹 배포 완료 → https://fgg-game.vercel.app
 
 ---
 

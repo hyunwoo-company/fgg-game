@@ -4,7 +4,7 @@ function TutorialScreen({ width = 1280, height = 800 }) {
   const steps = [
     {
       n: 1,
-      title: '렉시오에 오신 것을 환영합니다',
+      title: 'FGG에 오신 것을 환영합니다',
       body: '동양의 마작 타일과 서양의 포커 족보가 만난 클라이밍 보드게임. 가장 먼저 손에 든 모든 패를 비우면 승리합니다.',
       visual: 'logo',
     },

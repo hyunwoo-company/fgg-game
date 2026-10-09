@@ -1,6 +1,6 @@
 'use client';
 
-import type { RoundResult, ClientGameState } from '@lexio/game-logic';
+import type { RoundResult, ClientGameState } from '@fgg/game-logic';
 
 interface ScoreBoardProps {
   gameState: ClientGameState;

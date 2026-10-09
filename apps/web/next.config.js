@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@lexio/game-logic'],
+  transpilePackages: ['@fgg/game-logic'],
 };
 
 module.exports = nextConfig;

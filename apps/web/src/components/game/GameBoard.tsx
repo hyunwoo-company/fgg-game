@@ -12,7 +12,7 @@ import { PlayerHand } from './PlayerHand';
 import { ActionBar } from './ActionBar';
 import { ScoreBoard } from './ScoreBoard';
 import { GuidePanel } from './GuidePanel';
-import type { ClientPlayer, Tile } from '@lexio/game-logic';
+import type { ClientPlayer, Tile } from '@fgg/game-logic';
 
 // 상대 좌석을 좌측 vertical list로 배치 (루미큐브 스타일) — 카드 컴팩트하게 가까이
 // 0번 = me (하단 중앙, 별도 처리). 1번~ = 좌측에 위→아래로 list.

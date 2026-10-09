@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { getSocket } from '@/hooks/useSocket';
 import { useGameStore, type RoomInfo } from '@/store/gameStore';
 import { getClientId, saveSession } from '@/lib/clientId';
-import type { GameMode } from '@lexio/game-logic';
+import type { GameMode } from '@fgg/game-logic';
 
 function modeBtn(active: boolean): React.CSSProperties {
   return {

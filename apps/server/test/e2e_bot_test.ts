@@ -4,8 +4,8 @@
  */
 import assert from 'node:assert/strict';
 import { io, Socket } from 'socket.io-client';
-import { canPlay, detectCombination, getGameConfig } from '@lexio/game-logic';
-import type { ClientGameState, GameMode, PlayerCount } from '@lexio/game-logic';
+import { canPlay, detectCombination, getGameConfig } from '@fgg/game-logic';
+import type { ClientGameState, GameMode, PlayerCount } from '@fgg/game-logic';
 
 const SERVER = process.env.FGG_TEST_SERVER ?? 'http://localhost:3001';
 const TIMEOUT = 30_000;

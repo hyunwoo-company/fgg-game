@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { GameEngine } from '../src/game/GameEngine';
-import { detectCombination, getGameConfig } from '@lexio/game-logic';
-import type { GameMode, PlayerCount, TileNumber } from '@lexio/game-logic';
+import { detectCombination, getGameConfig } from '@fgg/game-logic';
+import type { GameMode, PlayerCount, TileNumber } from '@fgg/game-logic';
 import { getMaxNumber, findPlayableCombinations } from '../../web/src/lib/suggestions';
 import { buildMockGame } from '../../web/src/lib/mockGame';
 

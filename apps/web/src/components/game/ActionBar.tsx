@@ -3,8 +3,8 @@
 import { useMemo, useRef } from 'react';
 import { useGameStore } from '@/store/gameStore';
 import { findPlayableCombinations, getMaxNumber } from '@/lib/suggestions';
-import { detectCombination, canPlay as canPlayCombo } from '@lexio/game-logic';
-import type { Tile } from '@lexio/game-logic';
+import { detectCombination, canPlay as canPlayCombo } from '@fgg/game-logic';
+import type { Tile } from '@fgg/game-logic';
 
 interface ActionBarProps {
   isMyTurn: boolean;

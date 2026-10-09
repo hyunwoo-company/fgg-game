@@ -25,7 +25,7 @@ function LogoMark({ size = 28 }) {
         fontSize: size * 0.85,
         letterSpacing: '0.08em',
         color: 'var(--lx-text)',
-      }}>LEXIO</div>
+      }}>FGG</div>
     </div>
   );
 }

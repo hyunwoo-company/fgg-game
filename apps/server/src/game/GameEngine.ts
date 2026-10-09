@@ -2,11 +2,11 @@ import {
   createDeck, shuffleDeck, dealTiles, findFirstPlayer,
   detectCombination, canPlay, calculateScoring, applyExchanges,
   getGameConfig,
-} from '@lexio/game-logic';
+} from '@fgg/game-logic';
 import type {
   GameState, Player, Tile, TileCombination, PlayerCount, GameMode,
   ClientGameState, ClientPlayer, RoundResult,
-} from '@lexio/game-logic';
+} from '@fgg/game-logic';
 
 export class GameEngine {
   private state: GameState;

@@ -1,5 +1,5 @@
-import { detectCombination, canPlay, getGameConfig } from '@lexio/game-logic';
-import type { Tile, TileCombination, TileNumber, ClientGameState, GameMode } from '@lexio/game-logic';
+import { detectCombination, canPlay, getGameConfig } from '@fgg/game-logic';
+import type { Tile, TileCombination, TileNumber, ClientGameState, GameMode } from '@fgg/game-logic';
 
 function getCombos<T>(arr: T[], size: number): T[][] {
   if (size === 0) return [[]];

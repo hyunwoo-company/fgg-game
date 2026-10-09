@@ -5,7 +5,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
-import 'package:lexio_app/main.dart' as app;
+import 'package:fgg_app/main.dart' as app;
 
 void main() {
   patrolTest(
@@ -15,7 +15,7 @@ void main() {
       await $.pumpAndSettle();
 
       // room 화면으로 이동 전 로비가 표시되어야 함
-      expect(find.text('LEXIO'), findsOneWidget);
+      expect(find.text('FGG'), findsOneWidget);
     },
   );
 

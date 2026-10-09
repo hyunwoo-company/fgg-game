@@ -1,6 +1,6 @@
 import type { TileNumber, Suit, CombinationType, GameConfig, PlayerCount } from './types';
 
-// 렉시오 숫자 서열: 2가 최강, 3이 최약
+// FGG 숫자 서열: 2가 최강, 3이 최약
 export const NUMBER_RANK: Record<TileNumber, number> = {
   3: 0, 4: 1, 5: 2, 6: 3, 7: 4, 8: 5, 9: 6,
   10: 7, 11: 8, 12: 9, 13: 10, 14: 11, 15: 12,

@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'router.dart';
 
 void main() {
-  runApp(const ProviderScope(child: LexioApp()));
+  runApp(const ProviderScope(child: FggApp()));
 }
 
-class LexioApp extends StatelessWidget {
-  const LexioApp({super.key});
+class FggApp extends StatelessWidget {
+  const FggApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'LEXIO',
+      title: 'FGG',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

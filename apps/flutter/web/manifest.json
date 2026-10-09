@@ -1,11 +1,11 @@
 {
-    "name": "lexio_app",
-    "short_name": "lexio_app",
+    "name": "FGG",
+    "short_name": "FGG",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "FGG 사신수 보드게임",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

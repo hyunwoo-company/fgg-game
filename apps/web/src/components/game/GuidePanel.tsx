@@ -3,8 +3,8 @@
 import { Tile } from '@/components/tile/Tile';
 import { SUIT_META } from '@/components/tile/tileAssets';
 import { StraightRules } from '@/components/guide/StraightRules';
-import { SUIT_LABEL } from '@lexio/game-logic';
-import type { Tile as TileType, Suit, TileNumber } from '@lexio/game-logic';
+import { SUIT_LABEL } from '@fgg/game-logic';
+import type { Tile as TileType, Suit, TileNumber } from '@fgg/game-logic';
 
 interface GuidePanelProps {
   open: boolean;

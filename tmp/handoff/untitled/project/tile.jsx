@@ -1,4 +1,4 @@
-/* Lexio tile — based on the official Lexio Plus tile photo:
+/* FGG tile — ivory standing tile design reference:
    - IVORY body standing upright like a mahjong tile
    - Top CAP is BLANK ivory (the actual top surface — no markings)
    - Front face has ONE large circular CREST containing the number

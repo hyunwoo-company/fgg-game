@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useGameStore } from '@/store/gameStore';
 import { getClientId } from '@/lib/clientId';
-import type { ClientGameState, RoundResult } from '@lexio/game-logic';
+import type { ClientGameState, RoundResult } from '@fgg/game-logic';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3001';
 

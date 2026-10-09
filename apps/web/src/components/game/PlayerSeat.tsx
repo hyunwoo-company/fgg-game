@@ -1,6 +1,6 @@
 'use client';
 
-import type { ClientPlayer } from '@lexio/game-logic';
+import type { ClientPlayer } from '@fgg/game-logic';
 
 interface PlayerSeatProps {
   player: ClientPlayer;
